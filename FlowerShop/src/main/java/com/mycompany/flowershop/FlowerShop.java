@@ -8,27 +8,29 @@ package com.mycompany.flowershop;
  *
  * @author singh
  */
+import java.util.Scanner;
+
 public class FlowerShop {
 
-    static final String[] DAYS = {
-            "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-    };
-    static final String[] BOUQUETS = {"Roses", "Tulips", "Lilies"};
+static final String[] DAYS = {
+"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+};
+static final String[] BOUQUETS = {"Roses", "Tulips", "Lilies"};
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int[][] sales = new int[DAYS.length][BOUQUETS.length];
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+int[][] sales = new int[DAYS.length][BOUQUETS.length];
 
-        enterSales(scanner, sales);
+enterSales(scanner, sales);
 
-        int[] bouquetTotals = calculateBouquetTotals(sales);
-        int[] dailyTotals = calculateDailyTotals(sales);
-        int overallTotal = calculateOverallTotal(bouquetTotals);
+int[] bouquetTotals = calculateBouquetTotals(sales);
+int[] dailyTotals = calculateDailyTotals(sales);
+int overallTotal = calculateOverallTotal(bouquetTotals);
 
-        displaySales(sales, dailyTotals, bouquetTotals, overallTotal);
+displaySales(sales, dailyTotals, bouquetTotals, overallTotal);
 
-        scanner.close();
-    }
+scanner.close();
+}
     
     
 static void enterSales(Scanner scanner, int[][] sales) {
@@ -54,3 +56,24 @@ static int[] calculateBouquetTotals(int[][] sales) {
         return totals;
     }
 
+
+static int[] calculateDailyTotals(int[][] sales) {
+        int[] totals = new int[DAYS.length];
+        for (int day = 0; day < DAYS.length; day++) {
+            int sum = 0;
+            for (int bouquet = 0; bouquet < BOUQUETS.length; bouquet++) {
+                sum += sales[day][bouquet];
+            }
+            totals[day] = sum;
+        }
+        return totals;
+    }
+
+
+static int calculateOverallTotal(int[] bouquetTotals) {
+        int total = 0;
+        for (int i = 0; i < bouquetTotals.length; i++) {
+            total += bouquetTotals[i];
+        }
+        return total;
+    }
